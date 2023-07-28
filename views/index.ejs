@@ -18,8 +18,8 @@
           </p>
           <div class="d-inline-flex gap-2 mb-5">
               <div class="container-fluid">
-                <form class="d-flex custom-form" role="search">
-                  <input class="form-control me-2" type="search" placeholder="Search cryotocurrencies" aria-label="Search">
+                <form class="d-flex custom-form" role="search" method="post">
+                  <input id="searchId" class="form-control me-2" type="search" placeholder="Search cryotocurrencies" aria-label="Search">
                   <button class="btn btn-outline-light" type="submit">Search</button>
                 </form>
               </div>
@@ -27,5 +27,32 @@
         </div>
       </div>
     </container>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+      $(document).ready(function() {
+    // Sample data for autocomplete (you can replace it with your data source)
+    var autocompleteData = [
+        "Bitcoin",
+        "Ethereum",
+        "XRP",
+        "Dogecoin",
+        "Brave",
+        "MANA",
+        "Curve"
+    ];
+
+    // Function to fetch autocomplete data
+    function fetchAutocompleteData(request, response) {
+        var results = $.ui.autocomplete.filter(autocompleteData, request.term);
+        response(results.slice(0, 5)); // Show only the first 5 matches
+    }
+
+    // Initialize the autocomplete widget
+    $("#searchId").autocomplete({
+        source: fetchAutocompleteData
+    });
+});
+    </script>
 </body>
 </html>

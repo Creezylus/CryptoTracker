@@ -1,3 +1,8 @@
+:root {
+    --minWidth: 400px;
+    --width: 300px;
+  }
+  
 body
 {
     background-image: url("../CryptoBG.jpg");
@@ -24,6 +29,23 @@ body
 }
 .custom-form
 {
-    width: 400px;
-    min-width: 300px;
+    width: var(--width);
+    min-width: var(--minWidth);
+}
+
+.ui-autocomplete {
+    max-height: 200px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: white;
+    min-width:calc(var(--minWidth) -20px);
+    width: calc(var(--width) - 20px);
+    border-radius: 5px !important;
+    margin-left: 1px !important;
+    padding-left: 5px !important;
+}
+.ui-menu-item {
+
+    list-style-type: none; /* Remove the bullet points */
+    padding-left: 10px !important;
 }

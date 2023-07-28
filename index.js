@@ -17,3 +17,6 @@ app.listen(port, ()=>
     console.log(" I am active on port: 3000");
 }
 );
+app.post("/",(req,res) =>{
+    res.render('index.ejs');
+} );
