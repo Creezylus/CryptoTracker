@@ -1,0 +1,29 @@
+body
+{
+    background-image: url("../CryptoBG.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+.main-div
+{
+    margin-top: 5rem;
+}
+.custom-brand-text
+{
+    color: #EEEEEE !important;
+}
+.img-logo
+{
+    border-radius: 10px;
+    background-color: #9288F8;
+}
+.custom-jumbotron
+{
+    background: transparent !important;
+}
+.custom-form
+{
+    width: 400px;
+    min-width: 300px;
+}
