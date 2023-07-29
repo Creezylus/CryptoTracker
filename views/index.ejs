@@ -11,48 +11,102 @@
     <container class="main-container">
       <div class="container my-5">
         <div class="p-5 text-center bg-body-tertiary rounded-3 custom-jumbotron">
-          <img class="img-logoz" src = "/Coin.png" alt="logo"  height="200px"/>
+          <img class="img-logoz" src = "/CoinWhite.svg" alt="logo"  height="200px"/>
           <h1 class="text-body-emphasis fw-bold custom-brand-text">CryptoSpy</h1>
           <p class="col-lg-8 mx-auto fs-5 text-muted custom-brand-text">
              A personalized tracker for your favourite cryotocurrencies.
           </p>
           <div class="d-inline-flex gap-2 mb-5">
               <div class="container-fluid">
-                <form class="d-flex custom-form" role="search" method="post">
-                  <input id="searchId" class="form-control me-2" type="search" placeholder="Search cryotocurrencies" aria-label="Search">
+                <form class="d-flex custom-form" action="/search" method="post">
+                  <label for="searchCrypto"></label>
+                  <input id="searchCrypto" name="searchCrypto" class="form-control me-2" type="text" list="cryptoOptions" placeholder="Search cryotocurrencies">
+                  <datalist id="cryptoOptions"> 
+                       <% if (locals.Options) { %>
+                           <% Options.forEach(crypto => { %>
+                              <option value=<%=crypto %> >
+                          <% }); %>
+                         <% };   %>
+                   </datalist> 
+                  
                   <button class="btn btn-outline-light" type="submit">Search</button>
                 </form>
               </div>
           </div>
         </div>
       </div>
+      <% if(locals.arrData) { %>
+        <div class="container container-tables">
+          <div class="row">
+            <div class="col custom-tableData mb-1 py-4" style="font-size: 20px;">
+              Name
+            </div>
+            <div class="col custom-tableData mb-1 py-4" style="font-size: 20px;">
+              Symbol
+            </div>
+            <div class="col custom-tableData mb-1 py-4" style="font-size: 20px;">
+              Price
+            </div>
+            <div class="col custom-tableData mb-1 py-4" style="font-size: 20px;">
+              24Hr Change
+            </div>
+            <div class="col custom-tableData mb-1 py-4" style="font-size: 20px;">
+              Market Cap
+            </div>
+          </div>
+        </div>
+
+        <% for(idx = 0; idx<10; idx++) { %>        
+      <div class="container container-tables">
+        <div class="row">
+          <div class="col custom-tableData mb-1 py-4" style="font-size: 20px;">
+            <%= arrData[idx].name%>
+          </div>
+          <div class="col custom-tableData mb-1 py-4" style="font-size: 20px;">
+            <%= arrData[idx].symbol%>
+          </div>
+          <div id ="price" class="col custom-tableData mb-1 py-4" style="font-size: 20px;">
+            <%= parseFloat(arrData[idx].price).toFixed(3);%>
+          </div>
+          <div id ="change" class="col  change custom-tableData mb-1 py-4" style="font-size: 20px;">
+            <%= parseFloat(arrData[idx].change).toFixed(3);%>
+          </div>
+          <div id ="marketcap" class="col custom-tableData mb-1 py-4" style="font-size: 20px;">
+            <%= parseFloat(arrData[idx].marketcap).toFixed(3);%>
+          </div>
+        </div>
+      </div>
+      <% } %>
+      <% } %>
+
     </container>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
-      $(document).ready(function() {
-    // Sample data for autocomplete (you can replace it with your data source)
-    var autocompleteData = [
-        "Bitcoin",
-        "Ethereum",
-        "XRP",
-        "Dogecoin",
-        "Brave",
-        "MANA",
-        "Curve"
-    ];
 
-    // Function to fetch autocomplete data
-    function fetchAutocompleteData(request, response) {
-        var results = $.ui.autocomplete.filter(autocompleteData, request.term);
-        response(results.slice(0, 5)); // Show only the first 5 matches
-    }
 
-    // Initialize the autocomplete widget
-    $("#searchId").autocomplete({
-        source: fetchAutocompleteData
-    });
-});
+      function changeColor (className)
+      {
+        var elements = document.getElementsByClassName(className);
+    
+        for(idx = 0; idx< elements.length; idx++)
+        {
+          var textIn = elements[idx].textContent;
+          console.log(textIn);
+          if(parseFloat(textIn) > 0)
+          {
+            elements[idx].classList.add('positive');
+            elements[idx].classList.remove('negative');
+          }
+          else
+          {
+            elements[idx].classList.add('negative');
+            elements[idx].classList.remove('positive');
+          }
+        }
+      }
+      changeColor("change");
     </script>
+
 </body>
 </html>
