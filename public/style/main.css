@@ -1,11 +1,14 @@
 :root {
     --minWidth: 400px;
     --width: 300px;
-  }
-  
+}
 body
 {
-    background-image: url("../CryptoBG.jpg");
+    background-image: linear-gradient(0deg, #1d0d30 1%, #000000 220%);
+}  
+.bodyz
+{
+    background-image: url("../1CryptoBG.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -38,14 +41,43 @@ body
 }
 .custom-tableData
 {
+    color: white;
+    font-size: 18px I !important;
+    border-bottom: solid white;
+}
+.custom-tableTitle
+{
         color: white;
-        font-size: 18px I !important;
-        border-bottom: solid white;
+        font-size: 20px I !important;
+}
+.custom_search_res
+{
+    color: white;
+    font-size: 18px I !important;
 }
 .container-tables
 {
     width: 70%;
     min-width: calc(var(--minWidth) + 200px) !important;
+    background-color: rgba(220,220,220,0.2);
+}
+.tr-radius
+{
+    border-top-right-radius: 8px;
+}
+.tl-radius
+{
+    border-top-left-radius: 8px;
+}
+.container-title
+{
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+}
+.bot-radius
+{
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
 }
 .positive 
 {

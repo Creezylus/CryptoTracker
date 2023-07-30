@@ -93,24 +93,24 @@ app.get("/", (req,res) => {
         console.log(error);
     }
 });
-app.post("/search", async (req,res) => {
+// app.post("/search", async (req,res) => {
 
-    try
-    {
-        const asset  = req.body.searchCrypto.toLowerCase();
-        const url= ("https://api.coincap.io/v2/assets/" + asset);
-        const result = await axios.get(url);
-        res.render('index.ejs', 
-        {
-            Options : coinsArr,
-        });
-    }
-    catch
-    {
-        console.log(error);
-    }
+//     try
+//     {
+//         const asset  = req.body.searchCrypto.toLowerCase();
+//         const url= ("https://api.coincap.io/v2/assets/" + asset);
+//         const result = await axios.get(url);
+//         res.render('index.ejs', 
+//         {
+//             Options : coinsArr,
+//         });
+//     }
+//     catch
+//     {
+//         console.log(error);
+//     }
 
-});
+// });
 app.listen(port, ()=>
     {
         console.log(" I am active on port: 3000");

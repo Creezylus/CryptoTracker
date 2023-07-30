@@ -18,9 +18,9 @@
           </p>
           <div class="d-inline-flex gap-2 mb-5">
               <div class="container-fluid">
-                <form class="d-flex custom-form" action="/search" method="post">
+                <div class="d-flex custom-form" action="/search" method="post">
                   <label for="searchCrypto"></label>
-                  <input id="searchCrypto" name="searchCrypto" class="form-control me-2" type="text" list="cryptoOptions" placeholder="Search cryotocurrencies">
+                  <input id="searchTextCrypto" name="searchCrypto" class="form-control me-2" type="text" list="cryptoOptions" placeholder="Search cryotocurrencies">
                   <datalist id="cryptoOptions"> 
                        <% if (locals.Options) { %>
                            <% Options.forEach(crypto => { %>
@@ -29,59 +29,132 @@
                          <% };   %>
                    </datalist> 
                   
-                  <button class="btn btn-outline-light" type="submit">Search</button>
-                </form>
+                  <button id="searchBtn" class="btn btn-outline-light" onclick="loadContent()">Search</button>
+                  </div>
               </div>
           </div>
         </div>
       </div>
-      <% if(locals.arrData) { %>
-        <div class="container container-tables">
+      
+      <div id="contentDiv" style="display: none;">
+
+        <div class="container container-tables container-title">
+          <p class=" mx-auto fs-3 px-0 mb-0 custom-tableTitle">
+            Search Results
+          </p>
           <div class="row">
-            <div class="col custom-tableData mb-1 py-4" style="font-size: 20px;">
+            <div class="col custom-tableData mb-1 py-4 fw-bold tl-radius" style="font-size: 20px;">
               Name
             </div>
-            <div class="col custom-tableData mb-1 py-4" style="font-size: 20px;">
+            <div class="col custom-tableData mb-1 py-4 fw-bold" style="font-size: 20px;">
               Symbol
             </div>
-            <div class="col custom-tableData mb-1 py-4" style="font-size: 20px;">
-              Price
+            <div class="col custom-tableData mb-1 py-4 fw-bold" style="font-size: 20px;">
+              Price ($)
             </div>
-            <div class="col custom-tableData mb-1 py-4" style="font-size: 20px;">
-              24Hr Change
+            <div class="col custom-tableData mb-1 py-4 fw-bold" style="font-size: 20px;">
+              24Hr Change (%)
             </div>
-            <div class="col custom-tableData mb-1 py-4" style="font-size: 20px;">
-              Market Cap
+            <div class="col custom-tableData mb-1 py-4 fw-bold tr-radius" style="font-size: 20px;">
+              Market Cap ($)
             </div>
           </div>
-        </div>
-
-        <% for(idx = 0; idx<10; idx++) { %>        
-      <div class="container container-tables">
-        <div class="row">
-          <div class="col custom-tableData mb-1 py-4" style="font-size: 20px;">
-            <%= arrData[idx].name%>
+          <div class=" mb-5">
+            <div class="row">
+              <div id="searchName" class="col custom_search_res mb-1 py-4" style="font-size: 20px;">
+     
+              </div>
+              <div id="searchSymbol" class="col custom_search_res mb-1 py-4" style="font-size: 20px;">
+       
+              </div>
+              <div id ="searchPrice" class="col custom_search_res mb-1 py-4" style="font-size: 20px;">
+        
+              </div>
+              <div id ="searchChange" class="col  change custom_search_res mb-1 py-4" style="font-size: 20px;">
+           
+              </div>
+              <div id ="searchMarketcap" class="col custom_search_res mb-1 py-4" style="font-size: 20px;">
+      
+              </div>
+            </div>
           </div>
-          <div class="col custom-tableData mb-1 py-4" style="font-size: 20px;">
-            <%= arrData[idx].symbol%>
-          </div>
-          <div id ="price" class="col custom-tableData mb-1 py-4" style="font-size: 20px;">
-            <%= parseFloat(arrData[idx].price).toFixed(3);%>
-          </div>
-          <div id ="change" class="col  change custom-tableData mb-1 py-4" style="font-size: 20px;">
-            <%= parseFloat(arrData[idx].change).toFixed(3);%>
-          </div>
-          <div id ="marketcap" class="col custom-tableData mb-1 py-4" style="font-size: 20px;">
-            <%= parseFloat(arrData[idx].marketcap).toFixed(3);%>
-          </div>
-        </div>
+        </div> 
       </div>
-      <% } %>
-      <% } %>
+      
 
+
+
+
+      <div class="div-tables mb-4">
+        <% if(locals.arrData) { %>
+          <div class="container container-tables container-title">
+            <p class=" mx-auto fs-3 px-0 mb-0 custom-tableTitle">
+              Trending Cryptos
+            </p>
+            <div class="row">
+              <div class="col custom-tableData mb-1 py-4 fw-bold tl-radius" style="font-size: 20px;">
+                Name
+              </div>
+              <div class="col custom-tableData mb-1 py-4 fw-bold" style="font-size: 20px;">
+                Symbol
+              </div>
+              <div class="col custom-tableData mb-1 py-4 fw-bold" style="font-size: 20px;">
+                Price ($)
+              </div>
+              <div class="col custom-tableData mb-1 py-4 fw-bold" style="font-size: 20px;">
+                24Hr Change (%)
+              </div>
+              <div class="col custom-tableData mb-1 py-4 fw-bold tr-radius" style="font-size: 20px;">
+                Market Cap ($)
+              </div>
+            </div>
+          </div>
+
+          <% for(idx = 0; idx<10; idx++) { %>        
+          <div class="container container-tables">
+            <div class="row">
+              <div class="col custom-tableData mb-1 py-4" style="font-size: 20px;">
+                <%= arrData[idx].name%>
+              </div>
+              <div class="col custom-tableData mb-1 py-4" style="font-size: 20px;">
+                <%= arrData[idx].symbol%>
+              </div>
+              <div id ="price" class="col custom-tableData mb-1 py-4" style="font-size: 20px;">
+                <%= parseFloat(arrData[idx].price).toFixed(3);%>
+              </div>
+              <div id ="change" class="col  change custom-tableData mb-1 py-4" style="font-size: 20px;">
+                <%= parseFloat(arrData[idx].change).toFixed(3);%>
+              </div>
+              <div id ="marketcap" class="col custom-tableData mb-1 py-4" style="font-size: 20px;">
+                <%= parseFloat(arrData[idx].marketcap).toFixed(3);%>
+              </div>
+            </div>
+          </div>
+        <% } %>
+        <% } %>
+      </div>
+
+      <div class="container">
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+          <div class="col-md-4 d-flex align-items-center">
+            <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
+             <!-- <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>-->
+            </a>
+            <span class="mb-3 mb-md-0 custom-tableTitle">© 2023 CryptoSpy, Inc</span>
+          </div>
+      
+          <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+            <li></li>
+          </ul>
+        </footer>
+      </div>
     </container>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+
+    
     <script>
 
 
@@ -92,7 +165,6 @@
         for(idx = 0; idx< elements.length; idx++)
         {
           var textIn = elements[idx].textContent;
-          console.log(textIn);
           if(parseFloat(textIn) > 0)
           {
             elements[idx].classList.add('positive');
@@ -106,6 +178,44 @@
         }
       }
       changeColor("change");
+
+      elements = document.getElementsByClassName("container-tables");
+      //elements[elements.length-1].classList.add("bot-radius");
+
+
+        async function loadContent()
+        {
+          var requestedCrypto = $('#searchTextCrypto').val();
+          var searchTerm = document.getElementById("searchTextCrypto").value;
+          console.log(requestedCrypto);
+          if(requestedCrypto)
+          {
+
+            $("#contentDiv").slideDown("slow");
+
+            try
+            {
+              const url= "https://api.coincap.io/v2/assets/" + requestedCrypto.toLowerCase();
+              const response = await axios.get(url);
+              const responseData = response.data.data;
+              console.log(responseData.priceUsd);
+              console.log(typeof(responseData.priceUsd));
+              $('#searchName').text(capitalizeFirstLetter(responseData.id));
+              $('#searchSymbol').text(responseData.symbol);
+              $('#searchPrice').text((parseFloat(responseData.priceUsd).toFixed(3)));
+              $('#searchChange').text(parseFloat(responseData.changePercent24Hr).toFixed(3));
+              $('#searchMarketcap').text(parseFloat(responseData.marketCapUsd).toFixed(3));
+            }
+            catch(error)
+            {
+              console.log(error);
+            }
+          }
+        }
+        function capitalizeFirstLetter(string) 
+        {
+          return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+        } 
     </script>
 
 </body>
